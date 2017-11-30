@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Book from './Book'
+import BookGrid from './BookGrid'
 
 class BookShelf extends React.Component{
     static propTypes = {
+		titls: PropTypes.string,
         books: PropTypes.array.isRequired
     }
     render() {
@@ -12,13 +13,7 @@ class BookShelf extends React.Component{
             <div className="bookshelf">
               <h2 className="bookshelf-title">{this.props.title}</h2>
               <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.map((book) => (
-                      <li key={book.id}>
-                          <Book title={book.title} authors={book.authors} thumbnail={book.imageLinks.thumbnail} shelf={book.shelf}/>
-                      </li>
-                  ))}
-                </ol>
+				<BookGrid books={this.props.books}/>
               </div>
             </div>
         )

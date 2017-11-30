@@ -5,15 +5,38 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelf from './BookShelf' 
 import Search from './Search'
+import SearchResults from './SearchResults'
 
 class BooksApp extends React.Component {
 	state = {
-		books: []
+		books: [],
+		searchResults: []
 	}
 	componentDidMount() {
 		BooksAPI.getAll().then((books) => {
 			this.setState({books})
 		})
+	}
+	search = (query) => {
+		if (query) {
+			BooksAPI.search(query, 1).then((books) => {
+				if (books.hasOwnProperty("error")) {
+					this.setState({searchResults: []})
+				} else {
+					const modifiedBooks = books.map((book) => ({
+						id: book.id,
+						title: book.title,
+						authors: book.authors? book.authors : [],
+						imageLinks: book.imageLinks? book.imageLinks : {imageLinks: {thumbnail: ''}},
+						shelf: "none"
+					}))
+					this.setState({searchResults: modifiedBooks})
+				}
+			})
+		}
+	}
+	update = (book, shelf) => {
+		BooksAPI.update(book, shelf).then((response) => {console.log(response)})
 	}
 
 	render() {
@@ -22,7 +45,12 @@ class BooksApp extends React.Component {
 		const read = this.state.books.filter((book) => (book.shelf === "read"))
 		return (
 		  <div className="app">
-			<Route path="/search" component={Search}/>
+			<Route path="/search" render={() => (
+				<div>
+					<Search searchCallback={this.search}/>
+					<SearchResults books={this.state.searchResults}/>
+				</div>
+			)}/>
 			<Route exact path="/" render={() => (
 			  <div className="list-books">
 				<div className="list-books-title">

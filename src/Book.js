@@ -17,7 +17,7 @@ class Book extends React.Component {
 	static propTypes = {
 		title: PropTypes.string.isRequired,
 		authors: PropTypes.array.isRequired,
-		thumbnail: PropTypes.string.isRequired,
+		thumbnail: PropTypes.string,
 		shelf: PropTypes.string.isRequired
 	}
 	render() {
