@@ -12,14 +12,23 @@ class Search extends React.Component {
 
     onChange = (event) => {
         const query = event.target.value
-        this.setState({query}).then(() => {
-            BooksAPI.search(this.state.query, 10).then((books) => {
-                console.log(books)
-            })
-        })
+        this.setState({query: query.trim()})
+		if (query) {
+			BooksAPI.search(query, 1).then((books) => {
+				const modifiedBooks = books.map((book) => ({
+					id: book.id,
+					title: book.title,
+					authors: book.authors? book.authors : [],
+					thumbnail: book.imageLinks.thumbnail
+				}))
+				console.log(modifiedBooks)
+				this.setState({books: modifiedBooks})
+			})
+		}
     }
 
     render() {
+		console.log(this.state)
         return (
           <div className="search-books">
             <div className="search-books-bar">
@@ -32,7 +41,7 @@ class Search extends React.Component {
               <ol className="books-grid">
                   {this.state.books.map((book) => (
                       <li key={book.id}>
-                          <Book title={book.title} authors={book.authors} thumbnail={book.imageLinks.thumbnail}/>
+                          <Book title={book.title} authors={book.authors} thumbnail={book.thumbnail} shelf={"none"}/>
                       </li>
                   ))}
                 </ol>
