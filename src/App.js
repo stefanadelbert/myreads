@@ -28,17 +28,31 @@ class BooksApp extends React.Component {
 	}
 	search = (query) => {
 		if (query) {
-			BooksAPI.search(query, 1).then((books) => {
+			BooksAPI.search(query, 10).then((books) => {
 				if (books.hasOwnProperty("error")) {
 					this.setState({searchResults: []})
 				} else {
-					const modifiedBooks = books.map((book) => ({
-						id: book.id,
-						title: book.title,
-						authors: book.authors? book.authors : [],
-						imageLinks: book.imageLinks? book.imageLinks : {imageLinks: {thumbnail: ''}},
-						shelf: "none"
-					}))
+					const modifiedBooks = books.map((book) => {
+						var shelf  = "none"
+						const bookId = book.id
+						// Check if the book is already on a shelf and if it it, set its shelf accordingly.
+						if (this.state.currentlyReading.map((b) => b.id).includes(bookId)) {
+							shelf = "currentlyReading"
+						} else if (this.state.wantToRead.map((b) => b.id).includes(bookId)) {
+							shelf = "wantToRead"
+						} else if (this.state.read.map((b) => b.id).includes(bookId)) {
+							shelf = "read"
+						}
+						return ({
+							id: bookId,
+							title: book.title? book.title : "Unknown Title",
+							authors: book.authors? book.authors : [],
+							imageLinks: book.imageLinks? book.imageLinks : {imageLinks: {thumbnail: ''}},
+							shelf: shelf
+						})
+					})
+					console.log(modifiedBooks)
+
 					this.setState({searchResults: modifiedBooks})
 				}
 			})
