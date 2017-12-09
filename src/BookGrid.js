@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import Book from './Book'
 
-class BookShelf extends React.Component{
+class BookGrid extends React.Component{
     static propTypes = {
-        books: PropTypes.array.isRequired
+        books: PropTypes.array.isRequired,
+		onChangeShelf: PropTypes.func.isRequired
     }
     render() {
         return (
@@ -13,7 +14,7 @@ class BookShelf extends React.Component{
 			{this.props.books.map((book) => {
 				return (
 					<li key={book.id}>
-						<Book title={book.title} authors={book.authors} thumbnail={book.imageLinks.thumbnail} shelf={book.shelf}/>
+						<Book title={book.title} authors={book.authors} thumbnail={book.imageLinks.thumbnail} shelf={book.shelf} onChangeShelf={(newShelf) => {this.props.onChangeShelf(book, newShelf)}}/>
 					</li>
 				)
 			})}
@@ -22,4 +23,4 @@ class BookShelf extends React.Component{
     }
 }
 
-export default BookShelf
+export default BookGrid

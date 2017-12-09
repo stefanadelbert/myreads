@@ -9,13 +9,22 @@ import SearchResults from './SearchResults'
 
 class BooksApp extends React.Component {
 	state = {
-		books: [],
+		currentlyReading: [],
+		wantToRead: [],
+		read: [],
 		searchResults: []
 	}
-	componentDidMount() {
+	getAll() {
 		BooksAPI.getAll().then((books) => {
-			this.setState({books})
+			this.setState({
+				currentlyReading: books.filter((book) => (book.shelf === "currentlyReading")),
+				wantToRead: books.filter((book) => (book.shelf === "wantToRead")),
+				read: books.filter((book) => (book.shelf === "read"))
+			})
 		})
+	}
+	componentDidMount() {
+		this.getAll()
 	}
 	search = (query) => {
 		if (query) {
@@ -35,20 +44,17 @@ class BooksApp extends React.Component {
 			})
 		}
 	}
-	update = (book, shelf) => {
-		BooksAPI.update(book, shelf).then((response) => {console.log(response)})
+	changeShelf = (book, shelf) => {
+		BooksAPI.update(book, shelf).then(() => this.getAll())
 	}
 
 	render() {
-		const currentlyReading = this.state.books.filter((book) => (book.shelf === "currentlyReading"))
-		const wantToRead = this.state.books.filter((book) => (book.shelf === "wantToRead"))
-		const read = this.state.books.filter((book) => (book.shelf === "read"))
 		return (
 		  <div className="app">
 			<Route path="/search" render={() => (
 				<div>
 					<Search searchCallback={this.search}/>
-					<SearchResults books={this.state.searchResults}/>
+					<SearchResults books={this.state.searchResults} onChangeShelf={this.changeShelf}/>
 				</div>
 			)}/>
 			<Route exact path="/" render={() => (
@@ -57,9 +63,9 @@ class BooksApp extends React.Component {
 				  <h1>MyReads</h1>
 				</div>
 				<div className="list-books-content">
-					<BookShelf title="Currently Reading" books={currentlyReading}/>
-					<BookShelf title="Want To Read" books={wantToRead}/>
-					<BookShelf title="Read" books={read}/>
+					<BookShelf title="Currently Reading" books={this.state.currentlyReading} onChangeShelf={this.changeShelf}/>
+					<BookShelf title="Want To Read" books={this.state.wantToRead} onChangeShelf={this.changeShelf}/>
+					<BookShelf title="Read" books={this.state.read} onChangeShelf={this.changeShelf}/>
 				</div>
 				<div className="open-search">
 				  <Link to="/search">Add a book</Link>
