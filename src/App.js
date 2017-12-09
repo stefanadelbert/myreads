@@ -66,24 +66,26 @@ class BooksApp extends React.Component {
 	render() {
 		return (
 		  <div className="app">
-			<Route path="/search" render={() => (
-				<div>
-					<Search searchCallback={this.search}/>
-					<SearchResults books={this.state.searchResults} onChangeShelf={this.changeShelf}/>
-				</div>
-			)}/>
 			<Route path="/" render={() => (
 			  <div className="list-books">
 				<div className="list-books-title">
 				  <h1>MyReads</h1>
+					<Route exact path="/" render={() => (
+						<div className="open-search">
+						  <Link to="/search">Add a book</Link>
+						</div>
+					)}/>
 				</div>
+				<Route path="/search" render={() => (
+					<div>
+						<Search searchCallback={this.search}/>
+						<SearchResults books={this.state.searchResults} onChangeShelf={this.changeShelf}/>
+					</div>
+				)}/>
 				<div className="list-books-content">
 					<BookShelf title="Currently Reading" books={this.state.currentlyReading} onChangeShelf={this.changeShelf}/>
 					<BookShelf title="Want To Read" books={this.state.wantToRead} onChangeShelf={this.changeShelf}/>
 					<BookShelf title="Read" books={this.state.read} onChangeShelf={this.changeShelf}/>
-				</div>
-				<div className="open-search">
-				  <Link to="/search">Add a book</Link>
 				</div>
 			  </div>
 			)}/>
