@@ -17,6 +17,10 @@ class Search extends React.Component {
 			searchCallback(query)
 		}
     }
+	componentWillUnmount() {
+		console.log('Search.componentWillUnmount')
+		this.props.searchCallback("")
+	}
 
     render() {
         return (
@@ -24,7 +28,13 @@ class Search extends React.Component {
             <div className="search-books-bar">
               <Link to="/" className="close-search">Close search</Link>
               <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event) => {this.onChange(event, this.props.searchCallback)}}/>
+                <input
+					type="text"
+					autoFocus
+					placeholder="Search by title or author"
+					value={this.state.query}
+					onChange={(event) => {this.onChange(event, this.props.searchCallback)}}
+				/>
               </div>
             </div>
           </div>

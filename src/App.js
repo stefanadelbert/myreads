@@ -51,11 +51,12 @@ class BooksApp extends React.Component {
 							shelf: shelf
 						})
 					})
-					console.log(modifiedBooks)
-
 					this.setState({searchResults: modifiedBooks})
 				}
 			})
+		} else {
+			// If query is falsey, then reset the search results.
+			this.setState({searchResults: []})
 		}
 	}
 	changeShelf = (book, shelf) => {
@@ -71,7 +72,7 @@ class BooksApp extends React.Component {
 					<SearchResults books={this.state.searchResults} onChangeShelf={this.changeShelf}/>
 				</div>
 			)}/>
-			<Route exact path="/" render={() => (
+			<Route path="/" render={() => (
 			  <div className="list-books">
 				<div className="list-books-title">
 				  <h1>MyReads</h1>
