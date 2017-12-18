@@ -1,8 +1,9 @@
 # MyReads Project
 
-## TL;DR
+## Installation
 
-To get started developing right away:
+Clone the git repository and install all project dependencies with `npm install`.
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+## Use
+
+Start the development server with `npm start`.
