@@ -1,25 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Search extends React.Component {
 	static propTypes = {
 		searchCallback: PropTypes.func.isRequired
-	}
+	};
     state = {
         query: ''
-    }
+    };
 
     onChange = (event, searchCallback) => {
-        const query = event.target.value
-        this.setState({query: query.trim()})
+        const query = event.target.value;
+        this.setState({query: query.trim()});
 		if (query.length > 0) {
-			searchCallback(query)
+			searchCallback(query);
 		}
     }
 	componentWillUnmount() {
-		console.log('Search.componentWillUnmount')
-		this.props.searchCallback("")
+		console.log('Search.componentWillUnmount');
+		this.props.searchCallback("");
 	}
 
     render() {
@@ -38,8 +38,8 @@ class Search extends React.Component {
               </div>
             </div>
           </div>
-        )
+        );
     }
 }
 
-export default Search
+export default Search;

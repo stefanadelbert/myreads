@@ -1,23 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class ShelfChanger extends React.Component {
 	static propTypes = {
 		onChangeShelf: PropTypes.func.isRequired,
 		shelf: PropTypes.string.isRequired
-	}
+	};
 	render() {
 		return (
 			<div className="book-shelf-changer">
-				<select defaultValue={this.props.shelf} onChange={(event) => {this.props.onChangeShelf(event.target.value)}}>
+				<select value={this.props.shelf} onChange={(event) => {this.props.onChangeShelf(event.target.value)}}>
 					<option value="none" disabled>Move to...</option>
 					<option value="currentlyReading">Currently Reading</option>
 					<option value="wantToRead">Want to Read</option>
 					<option value="read">Read</option>
-					<option value="none">None</option>
 				</select>
 			</div>
-		)
+		);
 	}
 }
 
@@ -28,7 +27,7 @@ class Book extends React.Component {
 		thumbnail: PropTypes.string,
 		shelf: PropTypes.string.isRequired,
 		onChangeShelf: PropTypes.func.isRequired,
-	}
+	};
 	render() {
 		return (
 			<div className="book">
@@ -41,7 +40,7 @@ class Book extends React.Component {
 			</div>
 
 		)
-	}
+	};
 }
 
 export default Book;
