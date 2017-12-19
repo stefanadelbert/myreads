@@ -12,10 +12,8 @@ class Search extends React.Component {
 
     onChange = (event, searchCallback) => {
         const query = event.target.value;
-        this.setState({query: query.trim()});
-		if (query.length > 0) {
-			searchCallback(query);
-		}
+        this.setState({query});
+		searchCallback(query);
     }
 	componentWillUnmount() {
 		console.log('Search.componentWillUnmount');
