@@ -173,3 +173,18 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* error container */
+
+.error-container {
+  text-align: center;
+  height: 100%;
+}
+
+.error-container h1 {
+  margin: 0;
+  font-size: 130px;
+  font-weight: 300;
+  position: relative;
+  top: 50%;
+}

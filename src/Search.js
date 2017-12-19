@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class Search extends React.Component {
 	static propTypes = {
 		searchCallback: PropTypes.func.isRequired
 	};
     state = {
-        query: ''
+        query: ""
     };
 
     onChange = (event, searchCallback) => {
@@ -16,7 +16,6 @@ class Search extends React.Component {
 		searchCallback(query);
     }
 	componentWillUnmount() {
-		console.log('Search.componentWillUnmount');
 		this.props.searchCallback("");
 	}
 
