@@ -1,11 +1,11 @@
-import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import React from "react";
+import { Route, Link } from "react-router-dom";
 
-import * as BooksAPI from './BooksAPI';
-import './App.css';
-import BookShelf from './BookShelf';
-import Search from './Search';
-import SearchResults from './SearchResults';
+import * as BooksAPI from "./BooksAPI";
+import "./App.css";
+import BookShelf from "./BookShelf";
+import Search from "./Search";
+import SearchResults from "./SearchResults";
 
 class BooksApp extends React.Component {
 	defaultBook = {
@@ -37,6 +37,8 @@ class BooksApp extends React.Component {
 	}
 
 	search = (query) => {
+		// Remove any trailing spaces from the end of the query.
+		query = query.trim()
 		if (query) {
 			BooksAPI.search(query, 10).then((books) => {
 				if (books.hasOwnProperty("error")) {
