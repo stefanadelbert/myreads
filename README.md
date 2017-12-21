@@ -43,9 +43,90 @@ The app will fetch your reading list from a remote store and present it as books
 
 To move a book from one shelf to another, click the down arrow button on the bottom right of each book and select the shelf that the book should be moved to. To remove a book from the shelves, select the _None_ shelf.
 
-### Search
+### Add Books
 
 To add new books to the shelves, initiate a search by clicking the _+_ button at the bottom right or navigate to <http://localhost:3000/search>. Enter a search term into the input field and up to 20 books matching the search query will be displayed. Each book in the search result will be on the _None_ shelf, unless it is already on one of the other shelves. Move books to the required shelves as described above.
+
+Note that the available search terms are limited to those listed below:
+* Android
+* Art
+* Artificial Intelligence
+* Astronomy
+* Austen
+* Baseball
+* Basketball
+* Bhagat
+* Biography
+* Brief
+* Business
+* Camus
+* Cervantes
+* Christie
+* Classics
+* Comics
+* Cook
+* Cricket
+* Cycling
+* Desai
+* Design
+* Development
+* Digital Marketing
+* Drama
+* Drawing
+* Dumas
+* Education
+* Everything
+* Fantasy
+* Film
+* Finance
+* First
+* Fitness
+* Football
+* Future
+* Games
+* Gandhi
+* Homer
+* Horror
+* Hugo
+* Ibsen
+* Journey
+* Kafka
+* King
+* Lahiri
+* Larsson
+* Learn
+* Literary Fiction
+* Make
+* Manage
+* Marquez
+* Money
+* Mystery
+* Negotiate
+* Painting
+* Philosophy
+* Photography
+* Poetry
+* Production
+* Programming
+* React
+* Redux
+* River
+* Robotics
+* Rowling
+* Satire
+* Science Fiction
+* Shakespeare
+* Singh
+* Swimming
+* Tale
+* Thrun
+* Time
+* Tolstoy
+* Travel
+* Ultimate
+* Virtual Reality
+* Web Development
+* iOS
 
 ## Running the tests
 
