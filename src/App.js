@@ -106,27 +106,29 @@ class BooksApp extends React.Component {
 		return (
 			<div className="app">
 				<Switch>
-					<Route exact path="/" render={() => (
+					<Route exact path="/(|search)" render={() => (
 						<div>
 							<div className="list-books">
 								<div className="list-books-title">
 									<h1>MyReads</h1>
-									<div className="open-search">
-										<Link to="/search">Add a book</Link>
-									</div>
+									<Route exact path="/" render={() => (
+										<div className="open-search">
+											<Link to="/search">Add a book</Link>
+										</div>
+									)}/>
 								</div>
 							</div>
+							<Route path="/search" render={() => (
+								<div>
+									<Search searchCallback={this.search}/>
+									<SearchResults books={this.state.searchResults} onChangeShelf={this.changeShelf}/>
+								</div>
+							)}/>
 							<div className="list-books-content">
 								<BookShelf title="Currently Reading" books={this.state.currentlyReading} onChangeShelf={this.changeShelf}/>
 								<BookShelf title="Want To Read" books={this.state.wantToRead} onChangeShelf={this.changeShelf}/>
 								<BookShelf title="Read" books={this.state.read} onChangeShelf={this.changeShelf}/>
 							</div>
-						</div>
-					)}/>
-					<Route path="/search" render={() => (
-						<div>
-							<Search searchCallback={this.search}/>
-							<SearchResults books={this.state.searchResults} onChangeShelf={this.changeShelf}/>
 						</div>
 					)}/>
 					<Route component={NoMatch}/>
